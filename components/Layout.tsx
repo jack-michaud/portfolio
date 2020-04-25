@@ -8,34 +8,31 @@ type Props = {
 
 const Layout: React.FunctionComponent<Props> = ({
   children,
-  title = 'This is the default title',
+  title = 'NextJS',
 }) => (
-  <div>
+  <div className="h-screen">
     <Head>
       <title>{title}</title>
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
-    <header>
-      <nav>
+    <header className="h-12 flex items-center p-5">
+      <nav className="flex justify-between w-full">
         <Link href="/">
           <a>Home</a>
-        </Link>{' '}
-        |{' '}
-        <Link href="/about">
-          <a>About</a>
-        </Link>{' '}
-        |{' '}
-        <Link href="/users">
-          <a>Users List</a>
-        </Link>{' '}
-        | <a href="/api/users">Users API</a>
+        </Link>
+        <Link href="/weather">
+          <a>Weather</a>
+        </Link>
       </nav>
     </header>
-    {children}
-    <footer>
-      <hr />
-      <span>I'm here to stay (Footer)</span>
+    <div className="app">
+      {children}
+    </div>
+    <footer className="sticky bottom-0 bg-gray-300">
+      <div className="app">
+        <span>I'm here to stay (Footer)</span>
+      </div>
     </footer>
   </div>
 )

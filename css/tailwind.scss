@@ -1,0 +1,41 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+@import "tailwindcss/screens";
+
+html {
+  @apply font-sans;
+}
+body {
+  @apply m-0;
+}
+
+a {
+  @apply text-blue-500;
+
+  &:hover {
+    @apply text-blue-400 underline;
+  }
+}
+
+.app {
+  @apply mx-auto;
+  @apply p-5 w-full;
+
+  @screen lg {
+    & {
+      @apply max-w-screen-lg;
+    }
+  } 
+  @screen sm {
+    & {
+      @apply max-w-screen-sm;
+    }
+  } 
+  @screen md {
+    & {
+      @apply px-10;
+      @apply max-w-screen-md;
+    }
+  } 
+}
