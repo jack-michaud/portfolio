@@ -1,8 +1,10 @@
 import Layout from '../components/Layout'
 
 const IndexPage = () => (
-  <Layout title="Home | Next.js + TypeScript Example">
-    <h1>Hello Next.js 👋</h1>
+  <Layout title="🕺Jack Michaud🕺">
+    <div className="header-section sticky top-0">
+      Jack Michaud
+    </div>
   </Layout>
 )
 

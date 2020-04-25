@@ -38,4 +38,19 @@ a {
       @apply max-w-screen-md;
     }
   } 
+
+  @apply bg-black text-blue-500;
+  @apply min-h-screen;
 }
+
+.header-section {
+  @apply text-white bg-blue-700 text-center h-10 rounded-full font-semibold text-xl p-2 flex items-center justify-center;
+
+  @apply border-t-2 border-blue-600;
+  box-shadow: 0 4px 0px 0px #00438a;
+
+  @apply mt-3;
+  &:hover {
+  }
+}
+
