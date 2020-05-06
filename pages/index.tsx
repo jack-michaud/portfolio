@@ -42,7 +42,9 @@ const IndexPage = (props: IProps) => (
         <div className="app">
           <div className="w-full md:flex justify-between items-center">
             <div className="text-3xl font-sans uppercase text-blue-200 font-bold">Resume</div>
-            <img className="shadow-sm mx-auto md:mx-0 p-5 md:p-0" src="/images/resume.png"/>
+            <a href="/docs/JackMichaudResume.pdf">
+              <img className="shadow-sm mx-auto md:mx-0 p-5 md:p-0" src="/images/resume.png"/>
+            </a>
           </div>
         </div>
       </div>
