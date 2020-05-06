@@ -28,14 +28,28 @@ const Layout: React.FunctionComponent<Props> = ({
       </nav>
     </header>
     */ }
-    <div className="app">
+    <div>
       {children}
     </div>
-    { /* <footer className="sticky bottom-0 bg-gray-300">
-      <div className="app">
-        <span>I'm here to stay (Footer)</span>
+    <footer id="footer">
+      <div className="body flex items-center justify-center z-10">
+        <div className="app flex flex-col items-center justify-center font-mono">
+          <div className="flex justify-between">
+            <a href="https://twitter.com/_lomz_" target="_blank">
+              <img className="mx-1" src="/images/Twitter-Logo.svg" />
+            </a>
+            <a href="https://linkedin.com/in/jack-michaud/" target="_blank">
+              <img className="mx-1" src="/images/LinkedIn-Logo.svg" />
+            </a>
+          </div>
+          Jack Michaud { new Date().getFullYear() }<br/>
+          <div>
+            Icons by <a href="https://fontawesome.com/">Font Awesome</a><br/>
+          </div>
+        </div>
       </div>
-    </footer> */ }
+      <img src="/images/Ellipse.svg" className="ellipse z-0"/>
+    </footer>
   </div>
 )
 
