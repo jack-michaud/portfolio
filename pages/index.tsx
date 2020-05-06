@@ -17,7 +17,7 @@ const IndexPage = (props: IProps) => (
         <div className="app md:flex items-center justify-center">
           <div className="mb-5">
             <span className="text-6xl tracking-tighter">Jack Michaud</span><br/>
-            <span className="text-3xl tracking-tight flex items-center leading-3">
+            <span className="text-3xl tracking-tight flex items-center">
               Full Stack Developer 
               <a href="https://github.com/jack-michaud/" target="_blank"><GithubIcon /></a>
             </span><br/>
