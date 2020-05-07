@@ -16,8 +16,8 @@ const Separator = (props: IProps) => {
       style={{ marginBottom: '-25px'}}
       className={`relative ${classes}`}>
       { props.side == 'left' ?
-      <path fill-rule="evenodd" clip-rule="evenodd" d="M-928 0H1182.9L1235 25H-928V0Z" fill="#003471"/> :
-      <path fill-rule="evenodd" clip-rule="evenodd" d="M2162 0H52.0713L0 25H2162V0Z" fill="#003471"/> }
+      <path fillRule="evenodd" clipRule="evenodd" d="M-928 0H1182.9L1235 25H-928V0Z" fill="#003471"/> :
+      <path fillRule="evenodd" clipRule="evenodd" d="M2162 0H52.0713L0 25H2162V0Z" fill="#003471"/> }
     </svg>
   )
 }

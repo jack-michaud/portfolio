@@ -1,18 +1,21 @@
 import Layout from '../components/Layout'
 import GithubIcon from '../components/GithubIcon'
 import Separator from '../components/Separator';
+import Link from 'next/link';
 
+import { Blog } from '../interfaces';
 interface IProps {
   projects: {
     name: string;
     logo: string;
     description: string;
-  }[]
+  }[];
+  blogs: Blog[]
 }
 
 const IndexPage = (props: IProps) => (
-  <Layout title="🕺Jack Michaud🕺">
-    <div className="font-mono">
+  <Layout>
+    <div className="font-mono overflow-x-hidden">
       <div className="header">
         <div className="app md:flex items-center justify-center">
           <div className="mb-5">
@@ -56,15 +59,15 @@ const IndexPage = (props: IProps) => (
           </div>
           {
             props.projects.map( (p, idx) => (
-              <div className={`my-5 flex ${idx % 2 == 1 && 'flex-row-reverse'}`}>
+              <div className={`my-5 md:flex ${idx % 2 == 1 && 'md:flex-row-reverse'}`}>
+                <div className="w-48 mx-auto my-3 md:mx-3 flex items-center">
+                  <img className="min-w-full h-auto" src={p.logo}/>
+                </div>
                 <div>
                   <span className="uppercase font-bold text-2xl text-blue-200">{ p.name }</span><br/>
                   <p className="leading-loose">
                     { p.description }
                   </p>
-                </div>
-                <div className="w-48 mx-3 flex items-center">
-                  <img className="min-w-full h-auto" src={p.logo}/>
                 </div>
               </div>
             ))
@@ -78,7 +81,17 @@ const IndexPage = (props: IProps) => (
             Blog Posts
           </div>
           <div>
-            No blogs yet :)
+            {
+              props.blogs.map((blog, idx) => (
+                <Link href={blog.link} key={idx}>
+                  <div>
+                    <span role="button" className="text-2xl cursor-pointer hover:text-blue-300 text-blue-400 font-bold">{ blog.title }</span> <br/>
+                    <span className="text-blue-500">{ blog.description }</span><br/>
+                    { blog.date }
+                  </div>
+                </Link>
+              ))
+            }
           </div>
         </div>
       </div>
@@ -87,7 +100,15 @@ const IndexPage = (props: IProps) => (
 )
 
 import { NextPageContext } from 'next';
-export const getStaticProps = (_: NextPageContext) => {
+
+import { getBlogData, generateBlogSlugs } from '../utils/blog';
+export const getStaticProps = async (_: NextPageContext) => {
+  const blogs = await Promise.all(generateBlogSlugs().map(async slug => {
+    const blogData = await getBlogData(slug);
+    delete blogData.content;
+    return blogData;
+  }));
+
   return {
     props: {
       projects: [
@@ -121,9 +142,11 @@ export const getStaticProps = (_: NextPageContext) => {
             My friends wanted a Minecraft server, so I made a Discord bot that boots up a Digital Ocean Droplet with Terraform and runs a Minecraft server process whenever they want it.
           `
         }
-      ]
+      ],
+      blogs
     }
   }
 }
+
 
 export default IndexPage;

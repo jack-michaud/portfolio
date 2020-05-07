@@ -18,7 +18,6 @@ export default WeatherIndex;
 import { weatherService } from '../api/weather';
 export const getServerSideProps: GetServerSideProps<IProps> = async (_) => {
   const data = await weatherService();
-  console.log(data);
   return {
     props: {
       weather: data.weather
