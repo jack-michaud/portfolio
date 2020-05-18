@@ -107,7 +107,7 @@ export const getStaticProps = async (_: NextPageContext) => {
     const blogData = await getBlogData(slug);
     delete blogData.content;
     return blogData;
-  })).filter(blog => !blog.draft);
+  }));
 
   return {
     props: {
@@ -143,7 +143,7 @@ export const getStaticProps = async (_: NextPageContext) => {
           `
         }
       ],
-      blogs
+      blogs: blogs.filter(blog => !blog.draft)
     }
   }
 }
