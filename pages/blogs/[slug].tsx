@@ -5,14 +5,20 @@ import GithubIcon from '../../components/GithubIcon';
 import ReactMarkdown from 'react-markdown';
 import CodeBlock from '../../components/CodeBlock';
 
+
+import { Blog as BlogType } from '../../interfaces';
 interface IProps {
-  content: string;
-  title: string;
-  date: string;
+  blog: BlogType;
 }
 const Blog = (props: IProps) => {
+  const {
+    content,
+    title,
+    date,
+    tags
+  } = props.blog;
   return (
-    <Layout title={props.title}>
+    <Layout title={title}>
       <div className="header">
         <div className="app md:flex items-center justify-center">
           <div className="mb-5">
@@ -24,17 +30,22 @@ const Blog = (props: IProps) => {
               <a href="https://github.com/jack-michaud/" target="_blank"><GithubIcon /></a>
             </span><br/>
             <span className="text-3xl tracking-tight flex items-center">
-              { props.title }
+              { title }
             </span><br/>
+            <div className="flex">
+              {
+                tags.map((t, idx) => <button key={idx} className="btn sm mr-3">{ t }</button>)
+              }
+            </div>
             <span className="text-sm text-blue-300 tracking-tight flex items-center">
-              <time>{props.date}</time>
+              <time>{date}</time>
             </span>
           </div>
         </div>
       </div>
       <div className="blog">
         <div className="py-10 app">
-          <ReactMarkdown source={props.content}
+          <ReactMarkdown source={content}
             renderers={{ code: CodeBlock }}/>
         </div>
       </div>
@@ -56,7 +67,9 @@ export const getStaticProps: GetStaticProps<IProps, PathParams> = async (ctx) =>
   }
   const blogData = await getBlogData(slug);
   return {
-    props: blogData
+    props: {
+      blog: blogData
+    }
   }
 }
 

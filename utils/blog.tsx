@@ -20,6 +20,8 @@ export const getBlogData = async (slug: string): Promise<Blog> => {
     title: data.data.title,
     description: data.data.description,
     date: date.toDateString(),
-    link: `/blogs/${slug}`
+    link: `/blogs/${slug}`,
+    tags: data.data.tags.split(' '),
+    draft: data.data.draft
   }
 }

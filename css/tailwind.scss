@@ -84,6 +84,11 @@ body {
   background: linear-gradient(90deg, #084FA3 0%, #005DC8 100%);
   box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.25);
   border-radius: 18px;
+
+  & .sm {
+    @apply text-sm;
+    height: 25px;
+  }
 }
 
 #projects {
@@ -178,4 +183,12 @@ pre {
     @apply bg-blue-700;
     border-radius: 10px;
   }
+
+  code {
+    @apply text-white;
+  }
+}
+
+code {
+  @apply px-2 font-semibold text-blue-300;
 }
