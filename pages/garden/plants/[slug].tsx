@@ -4,6 +4,7 @@ import Layout from '../../../components/Layout';
 import GithubIcon from '../../../components/GithubIcon';
 import ReactMarkdown from 'react-markdown';
 import CodeBlock from '../../../components/CodeBlock';
+import PlantStage from '../../../components/PlantStage';
 
 
 import { Plant as PlantType } from '../../../interfaces';
@@ -15,7 +16,8 @@ const Plant = (props: IProps) => {
     content,
     title,
     date,
-    tags
+    tags,
+    stage
   } = props.plant;
   return (
     <Layout title={title}>
@@ -30,7 +32,11 @@ const Plant = (props: IProps) => {
               <a href="https://github.com/jack-michaud/" target="_blank"><GithubIcon /></a>
             </span><br/>
             <span className="text-3xl tracking-tight flex items-center">
-              { title }
+              { title } 
+              <div className="rounded-full flex justify-center items-center h-8 w-8 ml-2"
+                style={{backgroundColor: '#021327'}}>
+                <PlantStage stage={stage}/>
+              </div>
             </span><br/>
             <div className="flex">
               {
