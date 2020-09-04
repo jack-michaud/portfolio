@@ -3,7 +3,7 @@ title: "Ephemeral Server with Terraform and a Discord Bot (because why not)"
 description: "Alt title: the hoops I jump through for cheap Minecraft hosting"
 date: 2020-05-06
 tags: Terraform Python Minecraft
-draft: true
+stage: sprout
 ---
 
 > Minecraft hosting on the cheap
@@ -31,7 +31,7 @@ files, and running the `java` command every time we wanted to play (and `tar`ing
 
 ## Outline
 
-In this blog post, I'll outline how I addressed each of these issues and show 
+In this post, I'll outline how I addressed each of these issues and show 
 how I built this repo.
 
 1. **Discord bot** as an interface for my friends to launch and stop the server

@@ -3,7 +3,7 @@ title: "DNS Doesn't Work on Android"
 description: "PKI on Raspberry Pi and DNS over TLS"
 date: 2020-05-18
 tags: RaspberryPi Infrastructure stunnel openssl
-draft: false
+stage: tree
 ---
 
 # Background 

@@ -1,16 +1,17 @@
 import Layout from '../components/Layout'
 import GithubIcon from '../components/GithubIcon'
 import Separator from '../components/Separator';
+import PlantStage from '../components/PlantStage';
 import Link from 'next/link';
 
-import { Blog } from '../interfaces';
+import { Plant } from '../interfaces';
 interface IProps {
   projects: {
     name: string;
     logo: string;
     description: string;
   }[];
-  blogs: Blog[]
+  plants: Plant[]
 }
 
 const IndexPage = (props: IProps) => (
@@ -26,18 +27,18 @@ const IndexPage = (props: IProps) => (
             </span><br/>
             <span className="text-blue-300 pr-3">Tools</span>
             <span className="text-blue-400">
-              React Vue Django Flask Docker Terraform
+              React Vue Django Flask Docker Terraform Nomad
               AWS DigitalOcean ArchLinux RaspberryPi
             </span><br/>
             <span className="text-blue-300 pr-3">Languages</span>
             <span className="text-blue-400">
-              Python Typescript Java
+              Python Typescript Rust Java
             </span>
           </div>
           <div className="flex flex-col md:ml-3">
             <a href="#resume" className="btn">Resume</a>
             <a href="#projects" className="btn">Projects</a>
-            <a href="#blog" className="btn">Blog</a>
+            <a href="#garden" className="btn">Garden</a>
           </div>
         </div>
       </div>
@@ -75,19 +76,30 @@ const IndexPage = (props: IProps) => (
         </div>
       </div>
       <Separator side="left"/>
-      <div id="blog" className="flex items-center">
-        <div className="app">
-          <div className="text-3xl font-sans uppercase text-blue-200 font-bold">
-            Blog Posts
-          </div>
-          <div>
+      <div id="garden" className="flex items-center">
+        <div className="app my-10">
+          <Link href="/garden">
+            <div className="text-3xl font-sans uppercase text-blue-200 font-bold">
+              Garden
+            </div>
+          </Link>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {
-              props.blogs.map((blog, idx) => (
-                <Link href={blog.link} key={idx}>
-                  <div>
-                    <span role="button" className="text-2xl cursor-pointer hover:text-blue-300 text-blue-400 font-bold">{ blog.title }</span> <br/>
-                    <span className="text-blue-500">{ blog.description }</span><br/>
-                    { blog.date }
+              props.plants.map((plant, idx) => (
+                <Link href={plant.link} key={idx}>
+                  <div className="flex flex-col justify-between p-5" style={{backgroundColor: '#021327'}}>
+                    <div className="">
+                      <span role="button" className="text-2xl cursor-pointer hover:text-blue-300 text-blue-400 font-bold">{ plant.title }</span> <br/>
+                      <span className="text-blue-500">{ plant.description }</span><br/>
+                    </div>
+                    <div className="flex justify-between">
+                      <div>
+                        { plant.date }
+                      </div>
+                      <div>
+                        <PlantStage stage={plant.stage} />
+                      </div>
+                    </div>
                   </div>
                 </Link>
               ))
@@ -101,12 +113,12 @@ const IndexPage = (props: IProps) => (
 
 import { NextPageContext } from 'next';
 
-import { getBlogData, generateBlogSlugs } from '../utils/blog';
+import { getPlantData, generatePlantSlugs } from '../utils/plants';
 export const getStaticProps = async (_: NextPageContext) => {
-  const blogs = await Promise.all(generateBlogSlugs().map(async slug => {
-    const blogData = await getBlogData(slug);
-    delete blogData.content;
-    return blogData;
+  const plants = await Promise.all(generatePlantSlugs().map(async slug => {
+    const plantData = await getPlantData(slug);
+    delete plantData.content;
+    return plantData;
   }));
 
   return {
@@ -143,7 +155,7 @@ export const getStaticProps = async (_: NextPageContext) => {
           `
         }
       ],
-      blogs: blogs.filter(blog => !blog.draft)
+      plants
     }
   }
 }

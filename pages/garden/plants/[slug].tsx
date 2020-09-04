@@ -1,22 +1,22 @@
 import React from 'react';
 import Link from 'next/link';
-import Layout from '../../components/Layout';
-import GithubIcon from '../../components/GithubIcon';
+import Layout from '../../../components/Layout';
+import GithubIcon from '../../../components/GithubIcon';
 import ReactMarkdown from 'react-markdown';
-import CodeBlock from '../../components/CodeBlock';
+import CodeBlock from '../../../components/CodeBlock';
 
 
-import { Blog as BlogType } from '../../interfaces';
+import { Plant as PlantType } from '../../../interfaces';
 interface IProps {
-  blog: BlogType;
+  plant: PlantType;
 }
-const Blog = (props: IProps) => {
+const Plant = (props: IProps) => {
   const {
     content,
     title,
     date,
     tags
-  } = props.blog;
+  } = props.plant;
   return (
     <Layout title={title}>
       <div className="header">
@@ -45,6 +45,11 @@ const Blog = (props: IProps) => {
       </div>
       <div className="blog">
         <div className="py-10 app">
+          <div className="mb-5">
+            <Link href="/garden">
+              Back to the Garden
+            </Link>
+          </div>
           <ReactMarkdown source={content}
             renderers={{ code: CodeBlock }}/>
         </div>
@@ -55,7 +60,7 @@ const Blog = (props: IProps) => {
 
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { ParsedUrlQuery } from 'querystring';
-import { getBlogData, generateBlogSlugs } from '../../utils/blog';
+import { getPlantData, generatePlantSlugs } from '../../../utils/plants';
 
 interface PathParams extends ParsedUrlQuery {
   slug: string;
@@ -65,20 +70,20 @@ export const getStaticProps: GetStaticProps<IProps, PathParams> = async (ctx) =>
   if (slug == null) {
     throw '404';
   }
-  const blogData = await getBlogData(slug);
+  const plantData = await getPlantData(slug);
   return {
     props: {
-      blog: blogData
+      plant: plantData
     }
   }
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const slugs = generateBlogSlugs();
+  const slugs = generatePlantSlugs();
   return {
-    paths: slugs.map(slug => `/blogs/${slug}`),
+    paths: slugs.map(slug => `/garden/plants/${slug}`),
     fallback: false
   }
 }
 
-export default Blog;
+export default Plant;
