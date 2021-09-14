@@ -27,12 +27,17 @@ const IndexPage = (props: IProps) => (
             </span><br/>
             <span className="text-blue-300 pr-3">Tools</span>
             <span className="text-blue-400">
-              React Vue Django Flask Docker Terraform Nomad
-              AWS DigitalOcean ArchLinux RaspberryPi
+              FastAPI Flask Django
+              React Vue 
+              Docker 
+              Terragrunt Terraform
+              AWS DigitalOcean 
+              NixOS ArchLinux 
+              System76 RaspberryPi
             </span><br/>
             <span className="text-blue-300 pr-3">Languages</span>
             <span className="text-blue-400">
-              Python Typescript Rust Java
+              Python Typescript Golang Rust Java
             </span>
           </div>
           <div className="flex flex-col md:ml-3">
