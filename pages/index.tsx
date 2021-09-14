@@ -146,13 +146,6 @@ export const getStaticProps = async (_: NextPageContext) => {
           `
         },
         {
-          name: 'Dodocodes.website',
-          logo: '/images/Dodocodes-Logo.svg',
-          description: `
-            A web app for sharing Animal Crossing: New Horizons island codes to allow for authorized strangers to visit your island in a streamlined way. 
-          `
-        },
-        {
           name: 'Ephemeral Minecraft Server',
           logo: '/images/Minecraft-Logo.svg',
           description: `
