@@ -15,7 +15,9 @@ to be good AI parents. Mo Gawdat offers a course correction to ensure that AI wi
 He points to humans being the problem; our inputs corrupt AI like [Tay](https://en.wikipedia.org/wiki/Tay_(bot)) or [Alice](https://techcrunch.com/2017/10/24/another-ai-chatbot-shown-spouting-offensive-views/). 
 Humans are also the solution. When AI becomes sufficiently intelligent, to have values that preserve  
 
-If you're interested in a TLDR on Gawdat's book, this interview did some justice. It addressed a lot of my preliminary questions and made me want to read the book to understand what humanity needs to do to parent the singularity. https://www.youtube.com/watch?v=cc6KgUifWRw
+If you're interested in a TLDR on Gawdat's book, this interview did some justice. It addressed a lot of my preliminary questions and made me want to read the book to understand what humanity needs to do to parent the singularity. 
+
+<iframe width="100%" height="560" src="https://www.youtube.com/embed/cc6KgUifWRw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## The Progress of AI (WIP)
 
@@ -29,4 +31,3 @@ If you're interested in a TLDR on Gawdat's book, this interview did some justice
 The first exposure I got to his thoughts on the singularity was through this article: + Google is building god. They took one quote from a paywalled interview on Gawdat and ran with the "scary" part of AGI without addressing the "smart" side. They heavily paraphrase Gawdat and say that an AGI is "the inevitable birth of a vengeful god".
 
 We can end up with a scary AGI, but AI is a blank canvas. Gawdat: "AI for good is what we're all about".
-
