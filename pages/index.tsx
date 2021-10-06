@@ -126,6 +126,8 @@ export const getStaticProps = async (_: NextPageContext) => {
     return plantData;
   }));
 
+  plants.reverse()
+
   return {
     props: {
       projects: [
