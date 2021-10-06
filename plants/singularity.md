@@ -17,7 +17,7 @@ Humans are also the solution. When AI becomes sufficiently intelligent, to have 
 
 If you're interested in a TLDR on Gawdat's book, this interview did some justice. It addressed a lot of my preliminary questions and made me want to read the book to understand what humanity needs to do to parent the singularity. 
 
-<iframe width="100%" height="560" src="https://www.youtube.com/embed/cc6KgUifWRw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[Scary Smart: The Future of AI Video with author Mo Gawdat](https://www.youtube.com/embed/cc6KgUifWRw)
 
 ## The Progress of AI (WIP)
 
