@@ -58,57 +58,23 @@ const IndexPage = (props: IProps) => (
         </div>
       </div>
       <Separator side="right"/>
-      <div id="projects" className="flex items-center">
-        <div className="app my-5">
-          <div className="text-3xl font-sans uppercase text-blue-200 font-bold">
-            Project Highlights
-          </div>
-          {
-            props.projects.map( (p, idx) => (
-              <div className={`my-5 md:flex ${idx % 2 == 1 && 'md:flex-row-reverse'}`}>
-                <div className="w-48 mx-auto my-3 md:mx-3 flex items-center">
-                  <img className="min-w-full h-auto" src={p.logo}/>
-                </div>
-                <div>
-                  <span className="uppercase font-bold text-2xl text-blue-200">{ p.name }</span><br/>
-                  <p className="leading-loose">
-                    { p.description }
-                  </p>
-                </div>
-              </div>
-            ))
-          }
-        </div>
-      </div>
       <Separator side="left"/>
       <div id="garden" className="flex items-center">
-        <div className="app my-10">
-          <Link href="/garden">
-            <div className="text-3xl font-sans uppercase text-blue-200 font-bold">
-              Garden
+        <div className="app my-24">
+          <div className="flex flex-col items-center">
+            <div className="mr-2">
+              <img src="/images/Forest.svg" />
             </div>
-          </Link>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {
-              props.plants.map((plant, idx) => (
-                <Link href={plant.link} key={idx}>
-                  <div className="flex flex-col justify-between p-5" style={{backgroundColor: '#021327'}}>
-                    <div className="">
-                      <span role="button" className="text-2xl cursor-pointer hover:text-blue-300 text-blue-400 font-bold">{ plant.title }</span> <br/>
-                      <span className="text-blue-500">{ plant.description }</span><br/>
-                    </div>
-                    <div className="flex justify-between">
-                      <div>
-                        { plant.date }
-                      </div>
-                      <div>
-                        <PlantStage stage={plant.stage} />
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              ))
-            }
+            <div className="flex flex-col">
+              <div className="text-3xl font-sans uppercase text-blue-200 font-bold">
+                Garden
+              </div>
+              I replaced my garden on this site with a new Obsidian Publish vault. I've been stewing on it for about 6 months now. Check it out:<br/><br/>
+
+              <div className="w-full flex justify-center">
+                <a href="https://publish.obsidian.md/lomz"><button className="btn">Go to Orpheus</button></a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
