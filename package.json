@@ -8,9 +8,11 @@
     "type-check": "tsc"
   },
   "dependencies": {
+    "@metamask/providers": "^8.1.1",
     "@types/glob": "^7.1.1",
     "@types/react-syntax-highlighter": "^11.0.4",
     "autoprefixer": "^9.7.6",
+    "ethers": "^5.5.1",
     "glob": "^7.1.6",
     "gray-matter": "^4.0.2",
     "isomorphic-unfetch": "3.0.0",

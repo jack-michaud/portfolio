@@ -1,8 +1,8 @@
 import Layout from '../components/Layout'
 import GithubIcon from '../components/GithubIcon'
 import Separator from '../components/Separator';
-import PlantStage from '../components/PlantStage';
-import Link from 'next/link';
+import EthWave from '../components/EthWave';
+
 
 import { Plant } from '../interfaces';
 interface IProps {
@@ -58,6 +58,15 @@ const IndexPage = (props: IProps) => (
         </div>
       </div>
       <Separator side="right"/>
+      <div id="ethwave" className="pt-5">
+        <div className="app">
+          <div className="text-3xl font-sans uppercase text-blue-200 font-bold">
+            Waves
+          </div>
+          <EthWave />
+        </div>
+      </div>
+
       <Separator side="left"/>
       <div id="garden" className="flex items-center">
         <div className="app my-24">
