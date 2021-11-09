@@ -99,20 +99,8 @@ const useWaves = (hasEthWallet: boolean, authorizedAccounts: string[]) => {
   }, [authorizedAccounts, hasEthWallet])
 
 
-  const [tipAmount, _setTipAmount] = useState(0);
   const [waveStatus, setWaveStatus] = useState(WaveStatus.Ready);
   const [waveError, setWaveError] = useState<null | string>(null);
-
-  const setTipAmount = (e: any) => {
-    const value: number = Number(e.target.value);
-    if (value < 0) {
-      _setTipAmount(0);
-    } else if (value > 10) {
-      _setTipAmount(10);
-    } else {
-      _setTipAmount(value);
-    }
-  }
 
   const wave = async () => {
     const ethereum = getEthereumProvider();
@@ -142,12 +130,12 @@ const useWaves = (hasEthWallet: boolean, authorizedAccounts: string[]) => {
     }
   }
 
-  return { totalWaves, allWaves, wave, waveError, waveStatus, tipAmount, setTipAmount };
+  return { totalWaves, allWaves, wave, waveError, waveStatus, };
 }
 
-const AddWave = ({ useEthereumWallet, useWaves } : { useEthereumWallet: ReturnType<useEthereumWallet>,  useWaves: ReturnType<useWaves> }) => {
-  const { authorizedAccounts, requestAccounts, } = useEthereumWallet;
-  const { wave, waveError, waveStatus, tipAmount, setTipAmount } = useWaves
+const AddWave = ({ _useEthereumWallet, _useWaves } : { _useEthereumWallet: ReturnType<typeof useEthereumWallet>,  _useWaves: ReturnType<typeof useWaves> }) => {
+  const { authorizedAccounts, requestAccounts, } = _useEthereumWallet;
+  const { wave, waveError, waveStatus } = _useWaves
   if (authorizedAccounts.length == 0) {
     return (
       <div className="mt-5 flex flex-col justify-center items-center">
@@ -206,7 +194,7 @@ const EthWave = () => {
               </a>
             </div>
             { wave.awarded && <div className="rewarded">Awarded 0.0001 - Thanks for waving!</div> }
-            <div className="timestamp">{ new Date(wave.timestamp.toNumber() * 1000).toISOString("short") }</div>
+            <div className="timestamp">{ new Date(wave.timestamp.toNumber() * 1000).toISOString() }</div>
           </div>
         )) :
         <div>
@@ -214,7 +202,7 @@ const EthWave = () => {
         </div>
       }
       
-      <AddWave useEthereumWallet={_useEthereumWallet} useWaves={_useWaves} />
+      <AddWave _useEthereumWallet={_useEthereumWallet} _useWaves={_useWaves} />
     </div>
   );
 }

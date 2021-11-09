@@ -1,6 +1,6 @@
 export interface Plant {
   date: string;
-  content: string;
+  content?: string;
   title: string;
   description: string;
   link: string;
