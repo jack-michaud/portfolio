@@ -4,17 +4,8 @@ import Separator from '../components/Separator';
 import EthWave from '../components/EthWave';
 
 
-import { Plant } from '../interfaces';
-interface IProps {
-  projects: {
-    name: string;
-    logo: string;
-    description: string;
-  }[];
-  plants: Plant[]
-}
 
-const IndexPage = (props: IProps) => (
+const IndexPage = () => (
   <Layout>
     <div className="font-mono overflow-x-hidden">
       <div className="header">
@@ -90,50 +81,6 @@ const IndexPage = (props: IProps) => (
     </div>
   </Layout>
 )
-
-import { NextPageContext } from 'next';
-
-import { getPlantData, generatePlantSlugs } from '../utils/plants';
-export const getStaticProps = async (_: NextPageContext) => {
-  const plants = await Promise.all(generatePlantSlugs().map(async slug => {
-    const plantData = await getPlantData(slug);
-    delete plantData.content;
-    return plantData;
-  }));
-
-  plants.reverse()
-
-  return {
-    props: {
-      projects: [
-        {
-          name: 'Metascouter',
-          logo: '/images/Metascouter-Logo.svg',
-          description: `
-            A live computer vision data collection program for collecting data from 
-            esports gameplay. We also provide broadcast graphics for major Super
-            Smash Brothers tournaments using this data.
-          `
-        },
-        {
-          name: 'Harrow Search',
-          logo: '/images/Harrow-Logo.png',
-          description: `
-          A web scraper designed for online casing of subjects suspected of committing insurance fraud. It scrapes Facebook, Twitter, and Instagram and generates CSV, PDF, and interactive web reports of activity.
-          `
-        },
-        {
-          name: 'Ephemeral Minecraft Server',
-          logo: '/images/Minecraft-Logo.svg',
-          description: `
-            My friends wanted a Minecraft server, so I made a Discord bot that boots up a Digital Ocean Droplet with Terraform and runs a Minecraft server process whenever they want it.
-          `
-        }
-      ],
-      plants
-    }
-  }
-}
 
 
 export default IndexPage;
