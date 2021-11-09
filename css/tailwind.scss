@@ -89,11 +89,14 @@ body {
     @apply text-sm;
     height: 25px;
   }
+
+  &:disabled {
+    background: linear-gradient(90deg, #a0a0a1 0%, #cfcfcf 100%);
+  }
 }
 
-#projects {
+#ethwave {
   background: linear-gradient(90deg, #001731 4.31%, #00142B 84.29%);
-  min-height: 778px;
 }
 
 #garden {
@@ -191,4 +194,16 @@ pre {
 
 code {
   @apply px-2 font-semibold text-blue-300;
+}
+
+.wave {
+  .address {
+
+  }
+  .amount {
+
+  }
+  .timestamp {
+
+  }
 }
