@@ -2,18 +2,20 @@ import React, { useState, useEffect } from 'react';
 import metamask from '@metamask/providers';
 import { providers, Contract, BigNumber } from 'ethers';
 import abi from '../contracts/WavePortal.json';
+import { WavePortal } from '../contracts/WavePortal';
 
 const getEthereumProvider = (): metamask.BaseProvider | null => {
   return (window as any).ethereum as metamask.BaseProvider | null;
 }
 
-const getWaveContract = (ethereum: metamask.BaseProvider): Contract => {
+const getWaveContract = (ethereum: metamask.BaseProvider): WavePortal => {
   const provider = new providers.Web3Provider(ethereum);
   const signer = provider.getSigner();
-  const wavePortalContract = new Contract("0x0c88aaf352BCbE2744B232e48d3333388E8A26D4", abi.abi, signer);
+  const wavePortalContract: WavePortal = new Contract("0x47eda2c8387642174c1B8955252b19e08AeadC05", abi.abi, signer) as WavePortal;
       
   return wavePortalContract;
 }
+
 const useEthereumWallet = () => {
 
   const [hasWallet, setHasWallet] = useState(true);
@@ -64,24 +66,38 @@ enum WaveStatus {
   Mined = 3,
 }
 
-const useWaves = (authorizedAccounts: string[]) => {
-  const [totalWaves, setTotalWaves] = useState<undefined | number>(undefined);
+const useWaves = (hasEthWallet: boolean, authorizedAccounts: string[]) => {
+  const [totalWaves, setTotalWaves] = useState<undefined | number | "loading">(undefined);
+  const [allWaves, setAllWaves] = useState<undefined | "loading" | { owner: string, awarded: boolean, timestamp: BigNumber }[]>(undefined);
+  const canGetContract = (): boolean => {
+    const ethereum = getEthereumProvider();
+    return !!ethereum && authorizedAccounts.length > 0;
+  }
   const updateTotalWaves = async () => {
     const ethereum = getEthereumProvider();
-    if (!ethereum) {
-      return;
-    }
-    if (authorizedAccounts.length > 0) {
+    if (canGetContract() && ethereum) {
       const waveContract = getWaveContract(ethereum);
-      const retrievedTotalWaves: BigNumber[] = await waveContract.functions.getTotalWaves();
-      if (retrievedTotalWaves && retrievedTotalWaves.length > 0) {
-        setTotalWaves(retrievedTotalWaves[0].toNumber());
-      }
+      const retrievedTotalWaves = await waveContract.getTotalWaves();
+      setTotalWaves(retrievedTotalWaves.toNumber());
     }
   };
+  const updateAllWaves = async () => {
+    const ethereum = getEthereumProvider();
+    if (canGetContract() && ethereum) {
+      const waveContract = getWaveContract(ethereum);
+      const waves = await waveContract.getAllWaves();
+      setAllWaves(waves);
+    }
+  }
   useEffect(() => {
-    updateTotalWaves();
-  }, [authorizedAccounts])
+    if (totalWaves !== "loading") {
+      updateTotalWaves();
+    }
+    if (allWaves !== "loading") {
+      updateAllWaves();
+    }
+  }, [authorizedAccounts, hasEthWallet])
+
 
   const [tipAmount, _setTipAmount] = useState(0);
   const [waveStatus, setWaveStatus] = useState(WaveStatus.Ready);
@@ -114,15 +130,19 @@ const useWaves = (authorizedAccounts: string[]) => {
         setWaveStatus(WaveStatus.Mined);
         console.log(`Mined! ${waveTransaction.hash}`);
         await updateTotalWaves();
+        await updateAllWaves();
       } catch (e) {
-
+        setWaveError(`Oops, transaction failed. You may want to try again later. There is a 15 minute cooldown.`)
+        setTimeout(() => {
+          setWaveError(null);
+        }, 3000)
       } finally {
         setWaveStatus(WaveStatus.Ready);
       }
     }
   }
 
-  return { totalWaves, wave, waveError, waveStatus, tipAmount, setTipAmount };
+  return { totalWaves, allWaves, wave, waveError, waveStatus, tipAmount, setTipAmount };
 }
 
 const AddWave = ({ useEthereumWallet, useWaves } : { useEthereumWallet: ReturnType<useEthereumWallet>,  useWaves: ReturnType<useWaves> }) => {
@@ -140,10 +160,10 @@ const AddWave = ({ useEthereumWallet, useWaves } : { useEthereumWallet: ReturnTy
   }
   return (
     <div className="mt-5">
-      Tip Amount (ETH): <i><small>This is entirely optional!</small></i><br/>
-      <input type="number" value={tipAmount} onChange={setTipAmount} className="p-2 mt-1 text-black rounded-lg w-full" placeholder="Tip (ETH)" />
-      <button className="btn w-full mt-2" disabled={waveStatus != WaveStatus.Ready} onClick={wave}>Send Wave</button>
-
+      <button className="btn w-full mt-2" disabled={waveStatus != WaveStatus.Ready} onClick={wave}>
+        Send Wave
+      </button>
+      {waveError ? waveError : ""}
     </div>
   );
 }
@@ -151,8 +171,8 @@ const AddWave = ({ useEthereumWallet, useWaves } : { useEthereumWallet: ReturnTy
 const EthWave = () => {
   const _useEthereumWallet = useEthereumWallet();
   const { hasWallet, authorizedAccounts } = _useEthereumWallet;
-  const _useWaves = useWaves(authorizedAccounts);
-  const { totalWaves } = _useWaves;
+  const _useWaves = useWaves(hasWallet, authorizedAccounts);
+  const { totalWaves, allWaves } = _useWaves;
   if (!hasWallet) {
     return (
       <div className="m-24">
@@ -163,7 +183,37 @@ const EthWave = () => {
   return (
     <div className="m-24">
       <strong className="text-xl">Total Waves</strong>: 
-      <span className="pl-5 text-2xl">{ totalWaves }</span>
+      {authorizedAccounts.length > 0 ? 
+        <span className="pl-5 text-2xl">{totalWaves}</span> :
+        <span className="pl-5 text-xs">Must authenticate</span>
+      }
+      <br/>
+      <br/>
+      <small>
+        Hey, welcome, fellow dweb dweller. Make sure you're on the Rinkeby Test Net to use this app.<br /><br />
+        There's a 25% chance you'll get a 0.0001 Ethereum reward~<br /><br />
+      </small>
+      Wave List
+      <hr className="py-2"/>
+      { allWaves == "loading" && "Loading..."}
+      {
+        allWaves && allWaves !== "loading" && allWaves.length > 0 ?
+        allWaves.map((wave, idx) => (
+          <div className="wave" key={idx}>
+            <div className="address">
+              <a href={`https://rinkeby.etherscan.io/address/${wave.owner}`} target="_blank">
+                0x..{ wave.owner.substring(wave.owner.length - 4) }
+              </a>
+            </div>
+            { wave.awarded && <div className="rewarded">Awarded 0.0001 - Thanks for waving!</div> }
+            <div className="timestamp">{ new Date(wave.timestamp.toNumber() * 1000).toISOString("short") }</div>
+          </div>
+        )) :
+        <div>
+          No waves, yet. You could be the first!
+        </div>
+      }
+      
       <AddWave useEthereumWallet={_useEthereumWallet} useWaves={_useWaves} />
     </div>
   );
