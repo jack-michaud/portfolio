@@ -72,7 +72,7 @@ const IndexPage = () => (
               I replaced my garden on this site with a new Obsidian Publish vault. I've been stewing on it for about 6 months now. Check it out:<br/><br/>
 
               <div className="w-full flex justify-center">
-                <a href="https://publish.obsidian.md/lomz"><button className="btn">Go to Orpheus</button></a>
+                <a href="https://portfolio.lomz.me/garden/Me"><button className="btn">Go to Orpheus</button></a>
               </div>
             </div>
           </div>
