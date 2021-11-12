@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/garden/",
+      "destination": "https://publish.obsidian.md/serve?url=portfolio.lomz.me/garden"
+    },
+    {
+      "source": "/garden/:path*",
+      "destination": "https://publish.obsidian.md/serve?url=portfolio.lomz.me/garden/:path*"
+    }
+  ]
+}
