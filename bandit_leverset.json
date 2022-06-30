@@ -1,0 +1,38 @@
+[
+  {
+    "id": "658-Fir-St",
+    "sourceUrl": "https://www.zillow.com/homedetails/648-Fir-St-Edmonds-WA-98020/38541937_zpid/",
+    "type": "houseExternals",
+    "images": [
+      {"url": "https://photos.zillowstatic.com/fp/4fc4036f2a817cb65415565829701d8c-o_a.webp"},
+      {"url": "https://photos.zillowstatic.com/fp/60eabccef3717f0bde8260bae0a7a37d-o_a.webp"},
+      {"url": "https://photos.zillowstatic.com/fp/46ec6cb9ad19567dda27f38d55fcdda9-o_a.webp"},
+      {"url": "https://photos.zillowstatic.com/fp/6319eec3db4088143a2df9531ff80215-o_a.webp"},
+      {"url": "https://photos.zillowstatic.com/fp/54c501b3181ea5ef0300f6b220b9e107-o_a.webp"},
+      {"url": "https://photos.zillowstatic.com/fp/d9c66233bc173aee31416f14322a3172-o_a.webp"},
+      {"url": "https://photos.zillowstatic.com/fp/37748090c9a10fd4dd113d12f600a94c-o_a.webp"},
+      {"url": "https://photos.zillowstatic.com/fp/5718da4dee15d2ca1d657bfff720db21-o_a.webp"},
+      {"url": "https://photos.zillowstatic.com/fp/bef0cdaccd974b02bf736600a1a4f096-o_a.webp"},
+      {"url": "https://photos.zillowstatic.com/fp/31b137015ade9b73fe93b4f2ac857c2b-uncropped_scaled_within_1536_1152.webp"},
+      {"url": "https://photos.zillowstatic.com/fp/512cbc5b37600a808591122087981747-uncropped_scaled_within_1536_1152.webp"}
+    ]
+  },
+  {
+    "id": "658-Fir-St-1",
+    "sourceUrl": "https://www.zillow.com/homedetails/648-Fir-St-Edmonds-WA-98020/38541937_zpid/",
+    "type": "houseExternals",
+    "images": [
+      {"url": "https://photos.zillowstatic.com/fp/60eabccef3717f0bde8260bae0a7a37d-o_a.webp"},
+      {"url": "https://photos.zillowstatic.com/fp/4fc4036f2a817cb65415565829701d8c-o_a.webp"},
+      {"url": "https://photos.zillowstatic.com/fp/46ec6cb9ad19567dda27f38d55fcdda9-o_a.webp"},
+      {"url": "https://photos.zillowstatic.com/fp/6319eec3db4088143a2df9531ff80215-o_a.webp"},
+      {"url": "https://photos.zillowstatic.com/fp/54c501b3181ea5ef0300f6b220b9e107-o_a.webp"},
+      {"url": "https://photos.zillowstatic.com/fp/d9c66233bc173aee31416f14322a3172-o_a.webp"},
+      {"url": "https://photos.zillowstatic.com/fp/37748090c9a10fd4dd113d12f600a94c-o_a.webp"},
+      {"url": "https://photos.zillowstatic.com/fp/5718da4dee15d2ca1d657bfff720db21-o_a.webp"},
+      {"url": "https://photos.zillowstatic.com/fp/bef0cdaccd974b02bf736600a1a4f096-o_a.webp"},
+      {"url": "https://photos.zillowstatic.com/fp/31b137015ade9b73fe93b4f2ac857c2b-uncropped_scaled_within_1536_1152.webp"},
+      {"url": "https://photos.zillowstatic.com/fp/512cbc5b37600a808591122087981747-uncropped_scaled_within_1536_1152.webp"}
+    ]
+  }
+]
