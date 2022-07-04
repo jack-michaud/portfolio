@@ -131,7 +131,7 @@ import {
   PhotoService
 } from "../../bandit_client";
 
-export const getStaticProps = async (_: any) => {
+export const getServerSideProps = async (_: any) => {
   const imageSets = await loadBanditImageSet();
   console.log(imageSets);
 
