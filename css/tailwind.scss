@@ -93,6 +93,16 @@ body {
   &:disabled {
     background: linear-gradient(90deg, #a0a0a1 0%, #cfcfcf 100%);
   }
+
+  &.green {
+    @apply text-black;
+    background: #A9DB71 !important;
+  }
+
+  &.red {
+    background: #FF6188 !important;
+    @apply text-black;
+  }
 }
 
 #ethwave {
@@ -205,5 +215,15 @@ code {
   }
   .timestamp {
 
+  }
+}
+
+.bandit-app {
+  min-height: 800px;
+}
+
+.bandit-listitem {
+  img { 
+    height: 500px;
   }
 }
