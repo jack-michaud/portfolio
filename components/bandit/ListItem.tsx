@@ -23,7 +23,7 @@ interface ListItemProps {
   onScrollIntoView: Function;
 };
 const ListItem = (props: ListItemProps) => {
-  const ref = useRef()
+  const ref = useRef<HTMLDivElement>(null);
   const isVisible = useOnScreen(ref);
   useEffect(() => {
     if (isVisible) {

@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import ListItem from '../../components/bandit/ListItem';
 import Layout from '../../components/Layout'
 import {ImageAction, ImageActionChoice, loadBanditImageSet, loadUiTest} from '../../interfaces/bandit';
