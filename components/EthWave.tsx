@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import metamask from '@metamask/providers';
-import { providers, Contract, BigNumber } from 'ethers';
+import { BrowserProvider, Contract } from 'ethers';
 import abi from '../contracts/WavePortal.json';
-import { WavePortal } from '../contracts/WavePortal';
 
 const getEthereumProvider = (): metamask.BaseProvider | null => {
   return (window as any).ethereum as metamask.BaseProvider | null;
 }
 
-const getWaveContract = (ethereum: metamask.BaseProvider): WavePortal => {
-  const provider = new providers.Web3Provider(ethereum);
-  const signer = provider.getSigner();
-  const wavePortalContract: WavePortal = new Contract("0x47eda2c8387642174c1B8955252b19e08AeadC05", abi.abi, signer) as WavePortal;
-      
+const getWaveContract = async (ethereum: metamask.BaseProvider): Promise<Contract> => {
+  const provider = new BrowserProvider(ethereum);
+  const signer = await provider.getSigner();
+  const wavePortalContract = new Contract("0x47eda2c8387642174c1B8955252b19e08AeadC05", abi.abi, signer);
+
   return wavePortalContract;
 }
 
@@ -68,7 +67,7 @@ enum WaveStatus {
 
 const useWaves = (hasEthWallet: boolean, authorizedAccounts: string[]) => {
   const [totalWaves, setTotalWaves] = useState<undefined | number | "loading">(undefined);
-  const [allWaves, setAllWaves] = useState<undefined | "loading" | { owner: string, awarded: boolean, timestamp: BigNumber }[]>(undefined);
+  const [allWaves, setAllWaves] = useState<undefined | "loading" | { owner: string, awarded: boolean, timestamp: bigint }[]>(undefined);
   const canGetContract = (): boolean => {
     const ethereum = getEthereumProvider();
     return !!ethereum && authorizedAccounts.length > 0;
@@ -76,15 +75,15 @@ const useWaves = (hasEthWallet: boolean, authorizedAccounts: string[]) => {
   const updateTotalWaves = async () => {
     const ethereum = getEthereumProvider();
     if (canGetContract() && ethereum) {
-      const waveContract = getWaveContract(ethereum);
+      const waveContract = await getWaveContract(ethereum);
       const retrievedTotalWaves = await waveContract.getTotalWaves();
-      setTotalWaves(retrievedTotalWaves.toNumber());
+      setTotalWaves(Number(retrievedTotalWaves));
     }
   };
   const updateAllWaves = async () => {
     const ethereum = getEthereumProvider();
     if (canGetContract() && ethereum) {
-      const waveContract = getWaveContract(ethereum);
+      const waveContract = await getWaveContract(ethereum);
       const waves = await waveContract.getAllWaves();
       setAllWaves(waves);
     }
@@ -108,10 +107,10 @@ const useWaves = (hasEthWallet: boolean, authorizedAccounts: string[]) => {
       return;
     }
     if (authorizedAccounts.length > 0) {
-      const waveContract = getWaveContract(ethereum);
+      const waveContract = await getWaveContract(ethereum);
 
       try {
-        const waveTransaction = await waveContract.functions.wave();
+        const waveTransaction = await waveContract.wave();
         console.log(`Mining...${waveTransaction.hash}`);
         setWaveStatus(WaveStatus.Mining);
         await waveTransaction.wait();
@@ -194,7 +193,7 @@ const EthWave = () => {
               </a>
             </div>
             { wave.awarded && <div className="rewarded">Awarded 0.0001 - Thanks for waving!</div> }
-            <div className="timestamp">{ new Date(wave.timestamp.toNumber() * 1000).toISOString() }</div>
+            <div className="timestamp">{ new Date(Number(wave.timestamp) * 1000).toISOString() }</div>
           </div>
         )) :
         <div>

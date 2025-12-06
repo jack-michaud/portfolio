@@ -56,8 +56,9 @@ const Plant = (props: IProps) => {
               Back to the Garden
             </Link>
           </div>
-          <ReactMarkdown source={content}
-            renderers={{ code: CodeBlock }}/>
+          <ReactMarkdown components={{ code: CodeBlock }}>
+            {content}
+          </ReactMarkdown>
         </div>
       </div>
     </Layout>

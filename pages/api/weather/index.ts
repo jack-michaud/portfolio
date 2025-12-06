@@ -1,7 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 
-import fetch from 'isomorphic-unfetch';
-
 export const weatherService = async () => {
   const resp = await fetch('http://wttr.in/seattle?0&A&T');
   return {
