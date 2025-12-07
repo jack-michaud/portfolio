@@ -2,7 +2,6 @@ import React from 'react';
 import { GetServerSideProps } from 'next';
 import useSWR from 'swr';
 import Weather from '../../components/Weather';
-import fetch from 'unfetch';
 
 interface IProps {
   weather?: string;
